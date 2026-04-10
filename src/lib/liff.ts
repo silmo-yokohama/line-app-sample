@@ -24,12 +24,8 @@ export async function getLiffProfile(): Promise<{
 
 export async function sendLineMessage(text: string): Promise<boolean> {
   if (!liff.isInClient()) return false;
-  try {
-    await liff.sendMessages([{ type: "text", text }]);
-    return true;
-  } catch {
-    return false;
-  }
+  await liff.sendMessages([{ type: "text", text }]);
+  return true;
 }
 
 export function closeLiff(): void {

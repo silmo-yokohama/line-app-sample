@@ -19,13 +19,15 @@ export function CompletionScreen({
   const [sendState, setSendState] = useState<
     "idle" | "sending" | "sent" | "error"
   >("idle");
+  const [errorMessage, setErrorMessage] = useState<string>("");
 
   const handleSend = async () => {
     setSendState("sending");
     try {
       await onSendMessage();
       setSendState("sent");
-    } catch {
+    } catch (e) {
+      setErrorMessage(e instanceof Error ? e.message : String(e));
       setSendState("error");
     }
   };
@@ -99,7 +101,7 @@ export function CompletionScreen({
           <>
             <div className="text-center py-3">
               <p className="text-[13px] text-text-sub">
-                LINE アプリ内から開いてください
+                {errorMessage || "LINE アプリ内から開いてください"}
               </p>
             </div>
             <button
