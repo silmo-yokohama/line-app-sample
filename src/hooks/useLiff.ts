@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { initializeLiff, getLiffProfile, isInLiff } from "../lib/liff";
 
 type LiffProfile = {
+  userId: string;
   displayName: string;
   pictureUrl?: string;
 };

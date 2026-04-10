@@ -5,7 +5,7 @@ import {
   getAllQuestions,
   getTotalQuestionCount,
 } from "./lib/questionEngine";
-import { sendLineMessage, closeLiff } from "./lib/liff";
+import { sendCompletionMessage, closeLiff } from "./lib/liff";
 import { ChatForm } from "./components/ChatForm";
 
 function App() {
@@ -27,10 +27,10 @@ function App() {
   const totalQuestions = getTotalQuestionCount();
 
   const handleSendMessage = async () => {
-    const sent = await sendLineMessage(completionConfig.lineMessage);
-    if (!sent) {
-      throw new Error("LIFF外では送信できません");
+    if (!profile?.userId) {
+      throw new Error("ユーザー情報が取得できません");
     }
+    await sendCompletionMessage(profile.userId, completionConfig.lineMessage);
   };
 
   const handleClose = () => {

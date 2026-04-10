@@ -8,12 +8,14 @@ export async function initializeLiff(liffId: string): Promise<void> {
 }
 
 export async function getLiffProfile(): Promise<{
+  userId: string;
   displayName: string;
   pictureUrl?: string;
 } | null> {
   try {
     const profile = await liff.getProfile();
     return {
+      userId: profile.userId,
       displayName: profile.displayName,
       pictureUrl: profile.pictureUrl,
     };
@@ -22,10 +24,19 @@ export async function getLiffProfile(): Promise<{
   }
 }
 
-export async function sendLineMessage(text: string): Promise<boolean> {
-  if (!liff.isInClient()) return false;
-  await liff.sendMessages([{ type: "text", text }]);
-  return true;
+export async function sendCompletionMessage(
+  userId: string,
+  message: string
+): Promise<void> {
+  const res = await fetch("/api/complete", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ userId, message }),
+  });
+  if (!res.ok) {
+    const data = await res.json();
+    throw new Error(data.error || "送信に失敗しました");
+  }
 }
 
 export function closeLiff(): void {
