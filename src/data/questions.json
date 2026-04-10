@@ -1,0 +1,129 @@
+{
+  "questions": [
+    {
+      "id": "q1",
+      "text": "こんにちは！まず、あなたについて教えてください。どの年代ですか？",
+      "type": "single",
+      "options": [
+        { "value": "10s", "label": "10代" },
+        { "value": "20s", "label": "20代" },
+        { "value": "30s", "label": "30代" },
+        { "value": "40s", "label": "40代以上" }
+      ],
+      "next": {
+        "default": "q2"
+      }
+    },
+    {
+      "id": "q2",
+      "text": "趣味は何ですか？（複数選択OK）",
+      "type": "multiple",
+      "options": [
+        { "value": "sports", "label": "スポーツ" },
+        { "value": "music", "label": "音楽" },
+        { "value": "travel", "label": "旅行" },
+        { "value": "gaming", "label": "ゲーム" },
+        { "value": "reading", "label": "読書" }
+      ],
+      "next": {
+        "conditions": [
+          {
+            "if": { "includes": "sports" },
+            "then": "q3a"
+          }
+        ],
+        "default": "q3b"
+      }
+    },
+    {
+      "id": "q3a",
+      "text": "どんなスポーツが好きですか？",
+      "type": "single",
+      "options": [
+        { "value": "ball", "label": "球技（サッカー・野球など）" },
+        { "value": "fitness", "label": "フィットネス・ジム" },
+        { "value": "outdoor", "label": "アウトドア（登山・キャンプなど）" },
+        { "value": "water", "label": "マリンスポーツ" }
+      ],
+      "next": {
+        "default": "q4"
+      }
+    },
+    {
+      "id": "q3b",
+      "text": "休日はどう過ごすことが多いですか？",
+      "type": "single",
+      "options": [
+        { "value": "home", "label": "おうちでまったり" },
+        { "value": "outing", "label": "お出かけ・ショッピング" },
+        { "value": "friends", "label": "友人と過ごす" },
+        { "value": "creative", "label": "創作活動・ものづくり" }
+      ],
+      "next": {
+        "default": "q4"
+      }
+    },
+    {
+      "id": "q4",
+      "text": "SNS はどのくらい使いますか？",
+      "type": "single",
+      "options": [
+        { "value": "daily", "label": "毎日チェックする" },
+        { "value": "sometimes", "label": "たまに見る" },
+        { "value": "rarely", "label": "ほとんど使わない" }
+      ],
+      "next": {
+        "conditions": [
+          {
+            "if": { "equals": "daily" },
+            "then": "q5a"
+          }
+        ],
+        "default": "q5b"
+      }
+    },
+    {
+      "id": "q5a",
+      "text": "よく使う SNS はどれですか？（複数選択OK）",
+      "type": "multiple",
+      "options": [
+        { "value": "x", "label": "X（旧Twitter）" },
+        { "value": "instagram", "label": "Instagram" },
+        { "value": "tiktok", "label": "TikTok" },
+        { "value": "youtube", "label": "YouTube" }
+      ],
+      "next": {
+        "default": "q6"
+      }
+    },
+    {
+      "id": "q5b",
+      "text": "普段の情報収集はどうしていますか？",
+      "type": "single",
+      "options": [
+        { "value": "web", "label": "Webサイト・ニュースアプリ" },
+        { "value": "tv", "label": "テレビ・ラジオ" },
+        { "value": "friends", "label": "友人・口コミ" },
+        { "value": "paper", "label": "書籍・雑誌" }
+      ],
+      "next": {
+        "default": "q6"
+      }
+    },
+    {
+      "id": "q6",
+      "text": "最後に、このアンケートの使いやすさはいかがでしたか？",
+      "type": "single",
+      "options": [
+        { "value": "great", "label": "とても使いやすい" },
+        { "value": "good", "label": "まあまあ使いやすい" },
+        { "value": "fair", "label": "普通" },
+        { "value": "poor", "label": "使いにくい" }
+      ]
+    }
+  ],
+  "completion": {
+    "message": "ご回答ありがとうございました！\nあなたの回答を元に、最適な情報をお届けします。",
+    "lineMessage": "アンケートにご回答いただきありがとうございました！🎀"
+  }
+}
