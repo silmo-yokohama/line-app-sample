@@ -45,6 +45,15 @@ export function closeLiff(): void {
   }
 }
 
+export function openExternalUrlAndClose(url: string): void {
+  if (liff.isInClient()) {
+    liff.openWindow({ url, external: true });
+    liff.closeWindow();
+  } else {
+    window.open(url, "_blank", "noopener,noreferrer");
+  }
+}
+
 export function isInLiff(): boolean {
   return liff.isInClient();
 }

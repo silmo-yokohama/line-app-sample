@@ -5,7 +5,11 @@ import {
   getAllQuestions,
   getTotalQuestionCount,
 } from "./lib/questionEngine";
-import { sendCompletionMessage, closeLiff } from "./lib/liff";
+import {
+  sendCompletionMessage,
+  closeLiff,
+  openExternalUrlAndClose,
+} from "./lib/liff";
 import { ChatForm } from "./components/ChatForm";
 
 function App() {
@@ -35,6 +39,10 @@ function App() {
 
   const handleClose = () => {
     closeLiff();
+  };
+
+  const handleScheduleRegister = () => {
+    openExternalUrlAndClose("https://eeasy.jp/");
   };
 
   // Loading
@@ -74,6 +82,7 @@ function App() {
           onBack={handleBack}
           onSendMessage={handleSendMessage}
           onClose={handleClose}
+          onScheduleRegister={handleScheduleRegister}
           onReset={resetForm}
         />
       </div>
@@ -97,6 +106,7 @@ function App() {
         onBack={handleBack}
         onSendMessage={handleSendMessage}
         onClose={handleClose}
+        onScheduleRegister={handleScheduleRegister}
         onReset={resetForm}
       />
     </div>

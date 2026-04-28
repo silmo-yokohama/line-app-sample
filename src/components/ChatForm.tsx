@@ -27,6 +27,7 @@ type ChatFormProps = {
   onBack: () => void;
   onSendMessage: () => Promise<void>;
   onClose: () => void;
+  onScheduleRegister: () => void;
   onReset: () => void;
 };
 
@@ -45,6 +46,7 @@ export function ChatForm({
   onBack,
   onSendMessage,
   onClose,
+  onScheduleRegister,
   onReset,
 }: ChatFormProps) {
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -73,6 +75,7 @@ export function ChatForm({
           questions={allQuestions}
           onSendMessage={onSendMessage}
           onClose={onClose}
+          onScheduleRegister={onScheduleRegister}
         />
         <div className="px-4 pb-[max(env(safe-area-inset-bottom),12px)]">
           <button

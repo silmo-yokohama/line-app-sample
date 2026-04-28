@@ -7,6 +7,7 @@ type CompletionScreenProps = {
   questions: Question[];
   onSendMessage: () => Promise<void>;
   onClose: () => void;
+  onScheduleRegister: () => void;
 };
 
 export function CompletionScreen({
@@ -15,6 +16,7 @@ export function CompletionScreen({
   questions,
   onSendMessage,
   onClose,
+  onScheduleRegister,
 }: CompletionScreenProps) {
   const [sendState, setSendState] = useState<
     "idle" | "sending" | "sent" | "error"
@@ -91,8 +93,25 @@ export function CompletionScreen({
         className="flex flex-col gap-3 pb-[max(env(safe-area-inset-bottom),16px)] animate-float-in opacity-0"
         style={{ animationDelay: `${300 + answers.length * 80}ms`, animationFillMode: "forwards" }}
       >
+        {sendState !== "error" && (
+          <button
+            onClick={onScheduleRegister}
+            className="w-full min-h-[52px] rounded-2xl text-[16px] font-bold tracking-tight bg-gradient-to-r from-pink-400 to-pink-500 text-white shadow-[0_4px_16px_rgba(255,107,157,0.4)] active:scale-[0.97] transition-all duration-300 ease-out flex items-center justify-center gap-2"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="3" />
+              <line x1="16" y1="2" x2="16" y2="6" />
+              <line x1="8" y1="2" x2="8" y2="6" />
+              <line x1="3" y1="10" x2="21" y2="10" />
+              <path d="M12 14v4" />
+              <path d="M10 16h4" />
+            </svg>
+            予定登録
+          </button>
+        )}
+
         {sendState === "sent" ? (
-          <div className="text-center py-4">
+          <div className="text-center py-2">
             <p className="text-[15px] font-bold text-pink-500">
               送信しました！
             </p>
@@ -119,10 +138,9 @@ export function CompletionScreen({
               className={`
                 w-full min-h-[52px] rounded-2xl text-[16px] font-bold tracking-tight
                 transition-all duration-300 ease-out active:scale-[0.97]
-                ${
-                  sendState === "sending"
-                    ? "bg-pink-200 text-pink-400 cursor-wait"
-                    : "bg-gradient-to-r from-pink-400 to-pink-500 text-white shadow-[0_4px_16px_rgba(255,107,157,0.4)]"
+                ${sendState === "sending"
+                  ? "bg-pink-200 text-pink-400 cursor-wait"
+                  : "bg-gradient-to-r from-pink-400 to-pink-500 text-white shadow-[0_4px_16px_rgba(255,107,157,0.4)]"
                 }
               `}
             >
